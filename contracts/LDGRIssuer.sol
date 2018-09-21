@@ -1,11 +1,14 @@
 pragma solidity ^0.4.24;
 
-import "./TransferAgentControlled.sol";
-import "./Owned.sol";
+import "../libs/TransferAgentControlled.sol";
+import "../libs/Owned.sol";
 import "./LDGRSecurity.sol";
 
 contract LDGRIssuer is Owned, TransferAgentControlled {
     string public name;
+    string public stateFileNumber;
+    string public stateOfIncorporation;
+    string public physicalAddressOfOperation;
     address[] securities;
 
     event CreateSecurity(
@@ -14,21 +17,41 @@ contract LDGRIssuer is Owned, TransferAgentControlled {
         string symbol
     );
 
-    constructor (
-        address _initialOwner,
-        address _initialTransferAgent,
-        string _name
-    ) Owned(_initialOwner) TransferAgentControlled(_initialTransferAgent) public {
-        name = _name;
-    }
-
     event TransferAgentUpdated(
         address indexed previousTransferAgent,
         address indexed newTransferAgent
     );
 
+    event PhysicalAddressOfOperationUpdated(
+        string previousPhysicalAddressOfOperation,
+        string newPhysicalAddressOfOperation
+    );
+
+    constructor (
+        address _initialOwner,
+        address _initialTransferAgent,
+        string _name,
+        string _stateFileNumber,
+        string _stateOfIncorporation,
+        string _physicalAddressOfOperation
+    ) Owned(_initialOwner) TransferAgentControlled(_initialTransferAgent) public {
+        name = _name;
+        stateFileNumber = _stateFileNumber;
+        stateOfIncorporation = _stateOfIncorporation;
+        physicalAddressOfOperation = _physicalAddressOfOperation;
+    }
+
     function setTransferAgent(address _newTransferAgent) public onlyOwner {
         _setTransferAgent(_newTransferAgent);
+    }
+
+    function setPhysicalAddressOfOperation(string _newPhysicalAddressOfOperation) public onlyOwner {
+        _setPhysicalAddressOfOperation(_newPhysicalAddressOfOperation);
+    }
+
+    function _setPhysicalAddressOfOperation(string _newPhysicalAddressOfOperation) internal {
+        emit PhysicalAddressOfOperationUpdated(physicalAddressOfOperation, _newPhysicalAddressOfOperation);
+        physicalAddressOfOperation = _newPhysicalAddressOfOperation;
     }
 
     function _setTransferAgent(address _newTransferAgent) internal {

@@ -1,0 +1,27 @@
+{
+  "name": "start-engine-ldgr",
+  "version": "1.0.0",
+  "description": "StartEngine LDGR Security Token Protocol",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StartEngine/ldgr_smart_contracts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StartEngine/ldgr_smart_contracts/issues"
+  },
+  "homepage": "https://github.com/StartEngine/ldgr_smart_contracts#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1"
+  }
+}

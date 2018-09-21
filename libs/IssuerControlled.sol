@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-import "./LDGRIssuer.sol";
+import "../contracts/LDGRIssuer.sol";
 
 contract IssuerControlled {
     address public issuer;

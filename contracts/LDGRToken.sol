@@ -4,8 +4,8 @@ pragma solidity ^0.4.24;
 Interface for LDGR
 */
 
-import "./IssuerControlled.sol";
-import "./SafeMath.sol";
+import "../libs/IssuerControlled.sol";
+import "../libs/openzeppelin/math/SafeMath.sol";
 
 contract LDGRToken is IssuerControlled {
     using SafeMath for uint256;
@@ -20,6 +20,16 @@ contract LDGRToken is IssuerControlled {
     event Transfer(
         address indexed from,
         address indexed to,
+        uint256 value
+    );
+
+    event Mint(
+        address indexed to,
+        uint256 value
+    );
+
+    event Burn(
+        address indexed who,
         uint256 value
     );
 
@@ -52,6 +62,7 @@ contract LDGRToken is IssuerControlled {
         require(_to != address(0), "_to is not valid.");
         balances[_to] = balances[_to].add(_value);
         totalSupply = totalSupply.add(_value);
+        //emit Mint(_to, _value);
         emit Transfer(address(0), _to, _value);
         return true;
     }
@@ -60,6 +71,7 @@ contract LDGRToken is IssuerControlled {
         require(_value <= balances[_who], "_value cannot be greater than balance.");
         balances[_who] = balances[_who].sub(_value);
         totalSupply = totalSupply.sub(_value);
+        //emit Burn(_who, _value);
         emit Transfer(_who, address(0), _value);
         return true;
     }

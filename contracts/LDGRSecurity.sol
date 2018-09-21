@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-import "./IssuerControlled.sol";
+import "../libs/IssuerControlled.sol";
 import "./LDGRToken.sol";
 
 contract LDGRSecurity is IssuerControlled {
